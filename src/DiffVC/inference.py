@@ -6,6 +6,7 @@ import torchaudio
 from argparse import ArgumentParser
 from params import AttrDict, params as base_params
 from model import DiffVC
+from pathlib import Path
 
 device = torch.device('cuda')
 models = {}
@@ -83,7 +84,9 @@ def main(args):
     else:
         spectrogram = None
     mel_result, sr = predict(spectrogram, audio, model_dir=args.model_dir, fast_sampling=fast, params=base_params)
-    #torchaudio.save(args.output, audio.cpu(), sample_rate=sr)
+
+    if Path(args.out)
+    torchaudio.save(args.output, audio.cpu(), sample_rate=sr)
     mel = mel_result.cpu()
     
     print()
@@ -94,8 +97,9 @@ def main(args):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='inference for DiffVC')
-    parser.add_argument('model_dir', help='directory containing pretrained DiffVC model')
-    parser.add_argument('source_wav_path', help='path for source wav')
-    parser.add_argument('target_spectrogram_path', help='path for target spectrogram')
+    parser.add_argument('model_dir', default=Path, help='directory containing pretrained DiffVC model')
+    parser.add_argument('source_wav_path', default=Path, help='path for source wav')
+    parser.add_argument('target_spectrogram_path', default=Path, help='path for target spectrogram')
+    parser.add_argument('output', default=Path, help='path for output spectrogram')
     main(parser.parse_args())
   
