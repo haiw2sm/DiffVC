@@ -10,7 +10,14 @@
   "features": {
     "ghcr.io/devcontainers/features/nvidia-cuda:1": {
       "cudaVersion": "11.3",
-      "installToolkit": true
+      "installToolkit": true,
+      "installNvtx": true,
+      "installCudnn": true,
+      "installCudnnDev": true,
+      "cudannVersion": "8.6.0.163"
     }
-  }
+  },
+  "installsAfter": [
+      "ghcr.io/devcontainers/features/common-utils"
+  ]
 }
